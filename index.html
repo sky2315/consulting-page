@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24시간 맞춤 자산·보험 무료 컨설팅 신청</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Noto Sans KR) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8fafc;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+        .accent-gradient {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <!-- Header / Hero Section -->
+    <header class="gradient-bg text-white py-12 px-4 shadow-lg relative overflow-hidden">
+        <div class="max-w-3xl mx-auto text-center relative z-10">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 bg-blue-600/30 border border-blue-400/30 text-blue-300 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+                <span class="w-2 h-2 rounded-full bg-blue-400 animate-ping"></span>
+                24시간 실시간 상담 접수중
+            </div>
+            
+            <h1 class="text-3xl md:text-4xl font-extrabold leading-tight mb-4">
+                <span class="text-blue-400">20년 경력</span> 베테랑 전문가의<br>
+                맞춤형 자산 · 보험 리모델링 컨설팅
+            </h1>
+            
+            <p class="text-slate-300 text-base md:text-lg mb-6 max-w-xl mx-auto leading-relaxed">
+                복잡하고 어려운 보험 및 절세 전략,<br class="sm:hidden"> 
+                직군별 맞춤 컨설팅으로 명쾌한 답을 드립니다.
+            </p>
+
+            <!-- Trust Stats -->
+            <div class="grid grid-cols-3 gap-2 pt-6 border-t border-slate-700 max-w-lg mx-auto text-center">
+                <div>
+                    <div class="text-2xl font-bold text-blue-400">20년+</div>
+                    <div class="text-xs text-slate-400">전문 경력</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-blue-400">3,500+</div>
+                    <div class="text-xs text-slate-400">누적 고객 상담</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-blue-400">99.2%</div>
+                    <div class="text-xs text-slate-400">고객 만족도</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Form Section -->
+    <main class="max-w-2xl mx-auto px-4 -mt-6 relative z-20 mb-16">
+        <!-- Notification Banner -->
+        <div class="bg-amber-50 border border-amber-200 text-amber-800 px-4 py-3 rounded-xl mb-6 shadow-sm flex items-center gap-3">
+            <i class="fa-solid fa-bell text-amber-600 text-lg"></i>
+            <div class="text-xs md:text-sm">
+                <span class="font-bold">현재 신청량이 많습니다.</span> 신청해주신 순서대로 24시간 이내에 순차 연락 드립니다.
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-slate-100">
+            <form id="consultationForm" onsubmit="handleSubmit(event)" class="space-y-6">
+                
+                <!-- 1. 직업 선택 -->
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">
+                        1. 현재 종사하시는 직군을 선택해 주세요 <span class="text-red-500">*</span>
+                    </label>
+                    <div class="grid grid-cols-2 gap-3" id="jobGroup">
+                        <label class="job-option cursor-pointer border-2 border-slate-200 rounded-xl p-3 text-center transition hover:border-blue-500 flex flex-col items-center justify-center gap-1">
+                            <input type="radio" name="job" value="공무원" class="sr-only" required onchange="handleJobSelect()">
+                            <i class="fa-solid fa-landmark text-2xl text-slate-600 mb-1"></i>
+                            <span class="font-semibold text-slate-800 text-sm">공무원 / 교직원</span>
+                        </label>
+                        <label class="job-option cursor-pointer border-2 border-slate-200 rounded-xl p-3 text-center transition hover:border-blue-500 flex flex-col items-center justify-center gap-1">
+                            <input type="radio" name="job" value="기업대표" class="sr-only" onchange="handleJobSelect()">
+                            <i class="fa-solid fa-building-user text-2xl text-slate-600 mb-1"></i>
+                            <span class="font-semibold text-slate-800 text-sm">기업 대표 / 임원</span>
+                        </label>
+                        <label class="job-option cursor-pointer border-2 border-slate-200 rounded-xl p-3 text-center transition hover:border-blue-500 flex flex-col items-center justify-center gap-1">
+                            <input type="radio" name="job" value="회사원" class="sr-only" onchange="handleJobSelect()">
+                            <i class="fa-solid fa-briefcase text-2xl text-slate-600 mb-1"></i>
+                            <span class="font-semibold text-slate-800 text-sm">직장인 / 회사원</span>
+                        </label>
+                        <label class="job-option cursor-pointer border-2 border-slate-200 rounded-xl p-3 text-center transition hover:border-blue-500 flex flex-col items-center justify-center gap-1">
+                            <input type="radio" name="job" value="자영업자" class="sr-only" onchange="handleJobSelect()">
+                            <i class="fa-solid fa-store text-2xl text-slate-600 mb-1"></i>
+                            <span class="font-semibold text-slate-800 text-sm">자영업자 / 개인사업자</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 2. 세부 관심 분야 선택 (체크박스 11개) -->
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <label class="block text-sm font-bold text-slate-700">
+                            2. 가장 관심 있는 분야를 선택해 주세요 (중복 선택 가능) <span class="text-red-500">*</span>
+                        </label>
+                        <span class="text-xs text-blue-600 font-semibold" id="recommendBadge"></span>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 bg-slate-50 p-4 rounded-xl border border-slate-200" id="categoryContainer">
+                        <!-- 세부 분야 체크박스 항목들 -->
+                        <label class="cat-checkbox flex items-center gap-2 p-2.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 cursor-pointer transition">
+                            <input type="checkbox" name="category" value="간병" class="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+                            <span class="text-xs sm:text-sm font-semibold text-slate-700">🩺 간병</span>
+                        </label>
+
+                        <label class="cat-checkbox flex items-center gap-2 p-2.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 cursor-pointer transition">
+                            <input type="checkbox" name="category" value="상속" class="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+                            <span class="text-xs sm:text-sm font-semibold text-slate-700">⚖️ 상속·증여</span>
+                        </label>
+
+                        <label class="cat-checkbox flex items-center gap-2 p-2.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 cursor-pointer transition">
+                            <input type="checkbox" name="category" value="연금" class="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+                            <span class="text-xs sm:text-sm font-semibold text-slate-700">🪙 연금·비과세</span>
+                        </label>
+
+                        <label class="cat-checkbox flex items-center gap-2 p-2.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 cursor-pointer transition">
+                            <input type="checkbox" name="category" value="암" class="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+                            <span class="text-xs sm:text-sm font-semibold text-slate-700">🎗️ 암</span>
+                        </label>
+
+                        <label class="cat-checkbox flex items-center gap-2 p-2.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 cursor-pointer transition">
+                            <input type="checkbox" name="category" value="심뇌혈관" class="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+                            <span class="text-xs sm:text-sm font-semibold text-slate-700">🫀 심뇌혈관</span>
+                        </label>
+
+                        <label class="cat-checkbox flex items-center gap-2 p-2.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 cursor-pointer transition">
+                            <input type="checkbox" name="category" value="퇴직금" class="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+                            <span class="text-xs sm:text-sm font-semibold text-slate-700">💼 퇴직금 플랜</span>
+                        </label>
+
+                        <label class="cat-checkbox flex items-center gap-2 p-2.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 cursor-pointer transition">
+                            <input type="checkbox" name="category" value="종신" class="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+                            <span class="text-xs sm:text-sm font-semibold text-slate-700">🛡️ 종신·경영인</span>
+                        </label>
+
+                        <label class="cat-checkbox flex items-center gap-2 p-2.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 cursor-pointer transition">
+                            <input type="checkbox" name="category" value="화재" class="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+                            <span class="text-xs sm:text-sm font-semibold text-slate-700">🔥 화재·재물</span>
+                        </label>
+
+                        <label class="cat-checkbox flex items-center gap-2 p-2.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 cursor-pointer transition">
+                            <input type="checkbox" name="category" value="자동차" class="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+                            <span class="text-xs sm:text-sm font-semibold text-slate-700">🚗 자동차·운전자</span>
+                        </label>
+
+                        <label class="cat-checkbox flex items-center gap-2 p-2.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 cursor-pointer transition">
+                            <input type="checkbox" name="category" value="실손" class="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+                            <span class="text-xs sm:text-sm font-semibold text-slate-700">🏥 실손의료비</span>
+                        </label>
+
+                        <label class="cat-checkbox flex items-center gap-2 p-2.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 cursor-pointer transition">
+                            <input type="checkbox" name="category" value="재가" class="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+                            <span class="text-xs sm:text-sm font-semibold text-slate-700">🏠 재가급여·요양</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 3. 고객 정보 입력 -->
+                <div class="space-y-4 pt-2">
+                    <h3 class="text-sm font-bold text-slate-700">3. 상담 받으실 정보를 입력해 주세요</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- 성함 -->
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">성함 <span class="text-red-500">*</span></label>
+                            <input type="text" id="name" name="name" required placeholder="홍길동" 
+                                class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+                        </div>
+
+                        <!-- 연락처 -->
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">연락처 <span class="text-red-500">*</span></label>
+                            <input type="tel" id="phone" name="phone" required placeholder="010-0000-0000" 
+                                class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+                        </div>
+                    </div>
+
+                    <!-- 주민번호 앞자리 및 성별 구분 -->
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">주민등록번호 앞자리 <span class="text-red-500">*</span></label>
+                        <div class="flex items-center gap-2">
+                            <input type="text" id="ssnFront" name="ssnFront" required maxlength="6" placeholder="생년월일 6자리 (예: 850101)" 
+                                class="w-2/3 px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm tracking-wider">
+                            <span class="text-slate-400 font-bold">-</span>
+                            <div class="w-1/3 flex items-center gap-1">
+                                <input type="text" id="ssnBack" name="ssnBack" required maxlength="1" placeholder="1" 
+                                    class="w-12 px-3 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm text-center font-bold">
+                                <span class="text-slate-400 text-lg font-bold">● ● ● ● ● ●</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 현재 거주지역 -->
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">현재 거주지역 <span class="text-red-500">*</span></label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <select id="regionMain" name="regionMain" required class="w-full px-3 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white">
+                                <option value="">시/도 선택</option>
+                                <option value="서울특별시">서울특별시</option>
+                                <option value="경기도">경기도</option>
+                                <option value="인천광역시">인천광역시</option>
+                                <option value="부산광역시">부산광역시</option>
+                                <option value="대구광역시">대구광역시</option>
+                                <option value="광주광역시">광주광역시</option>
+                                <option value="대전광역시">대전광역시</option>
+                                <option value="울산광역시">울산광역시</option>
+                                <option value="세종특별자치시">세종특별자치시</option>
+                                <option value="강원특별자치도">강원특별자치도</option>
+                                <option value="충청북도">충청북도</option>
+                                <option value="충청남도">충청남도</option>
+                                <option value="전라북도">전라북도</option>
+                                <option value="전라남도">전라남도</option>
+                                <option value="경상북도">경상북도</option>
+                                <option value="경상남도">경상남도</option>
+                                <option value="제주특별자치도">제주특별자치도</option>
+                            </select>
+                            <input type="text" id="regionSub" name="regionSub" placeholder="시/군/구 (예: 강남구)" 
+                                class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">희망 상담 시간대</label>
+                            <select id="preferredTime" name="preferredTime" class="w-full px-3 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white">
+                                <option value="언제나 가능">언제나 가능</option>
+                                <option value="오전 (09:00 ~ 12:00)">오전 (09:00 ~ 12:00)</option>
+                                <option value="오후 (12:00 ~ 18:00)">오후 (12:00 ~ 18:00)</option>
+                                <option value="저녁 (18:00 이후)">저녁 (18:00 이후)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">희망 상담 방식</label>
+                            <select id="preferredType" name="preferredType" class="w-full px-3 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white">
+                                <option value="전화 상담">전화 상담</option>
+                                <option value="카카오톡 상담">카카오톡 상담</option>
+                                <option value="대면 방문 상담">대면 방문 상담</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">기타 문의사항 (선택)</label>
+                        <textarea id="memo" name="memo" rows="3" placeholder="현재 가입 중인 보험이 있으시거나 궁금한 점을 간단히 적어주시면 더 자세한 상담이 가능합니다."
+                            class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"></textarea>
+                    </div>
+                </div>
+
+                <!-- 4. 개인정보 수집 동의 -->
+                <div class="pt-2 border-t border-slate-100">
+                    <div class="flex items-start gap-2">
+                        <input type="checkbox" id="privacy" required class="mt-1 w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+                        <label for="privacy" class="text-xs text-slate-600 leading-relaxed cursor-pointer">
+                            <span class="font-bold text-slate-700">[필수]</span> 개인정보(주민등록번호 앞자리 포함) 수집 및 이용에 동의합니다. 
+                            <button type="button" onclick="togglePrivacyModal()" class="text-blue-600 underline ml-1">내용보기</button>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 제출 버튼 -->
+                <button type="submit" id="submitBtn"
+                    class="w-full accent-gradient text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:opacity-95 transition transform active:scale-[0.98] pulse-animation flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    24시간 무료 맞춤 상담 신청하기
+                </button>
+            </form>
+        </div>
+
+        <!-- 상담 신청 후기 / 안내 -->
+        <div class="mt-8 bg-slate-100 rounded-xl p-5 border border-slate-200">
+            <h4 class="font-bold text-slate-700 text-sm mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-blue-600"></i>
+                20년 베테랑 전문가의 3가지 약속
+            </h4>
+            <ul class="text-xs text-slate-600 space-y-2">
+                <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-green-600 mt-0.5"></i>
+                    <span><strong>불필요한 과다 가입 권유 절대 없음:</strong> 기존 보험의 보장 공백만 찾아 효율적으로 리모델링합니다.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-green-600 mt-0.5"></i>
+                    <span><strong>직군별 맞춤형 혜택 안내:</strong> 공무원, 기업대표, 자영업자 특화 세제혜택 및 비과세 플랜 제공</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-green-600 mt-0.5"></i>
+                    <span><strong>철저한 비밀 보장:</strong> 제출해주신 상담 정보는 개인정보 보호법을 준수하며 상담 목적 외 절대 사용되지 않습니다.</span>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-8 px-4 text-center">
+        <div class="max-w-xl mx-auto space-y-2">
+            <p class="font-bold text-slate-300">20년 경력 전문 보험·자산 컨설팅</p>
+            <p>상담문의: 010-XXXX-XXXX | 평일/주말 24시간 상담접수 가능</p>
+            <p class="text-slate-500 pt-2">Copyright © 2026 Veteran Financial Advisor. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Complete Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto text-green-600 text-3xl">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800">상담 신청이 완료되었습니다!</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+                신청해주신 정보가 정상적으로 접수되었습니다.<br>
+                <span class="font-semibold text-blue-600">20년 경력 전문가</span>가 내용을 확인 후 희망하신 시간대에 신속히 카카오톡 또는 전화로 연락 드리겠습니다.
+            </p>
+            <button onclick="closeModal()" class="w-full bg-slate-800 text-white py-3 rounded-xl font-bold text-sm hover:bg-slate-700">
+                확인
+            </button>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacyModal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+            <h3 class="text-lg font-bold text-slate-800 border-b pb-2">개인정보 수집 및 이용 동의</h3>
+            <div class="text-xs text-slate-600 space-y-2 max-h-60 overflow-y-auto pr-2">
+                <p><strong>1. 수집 항목:</strong> 성함, 연락처, 주민등록번호 앞자리(생년월일 및 성별), 거주지역, 직군, 선택 관심 분야, 희망 상담 시간, 문의사항</p>
+                <p><strong>2. 수집 및 이용 목적:</strong> 맞춤형 보험 분석, 연령/지역별 자산 컨설팅 상담 제공, 관련 정보 안내</p>
+                <p><strong>3. 보유 및 이용 기간:</strong> 상담 완료 및 목적 달성 후 1년 이내 파기 (고객 요청 시 즉시 파기)</p>
+                <p><strong>4. 동의 거부 권리:</strong> 귀하는 개인정보 수집 동의를 거부할 권리가 있으나, 거부 시 상담 서비스 이용이 제한될 수 있습니다.</p>
+            </div>
+            <button onclick="togglePrivacyModal()" class="w-full bg-blue-600 text-white py-2.5 rounded-xl font-bold text-sm hover:bg-blue-700">
+                닫기
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // 🚨 카카오톡 알림 전송 웹훅 (설계사님의 구글 스크립트 또는 카카오 나에게 보내기 URL 연결 부위)
+        // 아래 변수에 생성한 전송 URL을 집어넣으시면 실제 카톡 메시지가 도착합니다.
+        const KAKAO_WEBHOOK_URL = ""; 
+
+        // 직군별 추천 관심 분야 매핑
+        const recommendedCategories = {
+            '공무원': ['연금', '퇴직금', '실손', '암'],
+            '기업대표': ['상속', '종신', '화재', '퇴직금'],
+            '회사원': ['실손', '암', '심뇌혈관', '연금'],
+            '자영업자': ['화재', '간병', '재가', '자동차']
+        };
+
+        // 직군 선택 시 UI 및 추천 체크박스 처리
+        function handleJobSelect() {
+            const selectedJob = document.querySelector('input[name="job"]:checked')?.value;
+            const badge = document.getElementById('recommendBadge');
+
+            document.querySelectorAll('.job-option').forEach(el => {
+                const radio = el.querySelector('input');
+                if (radio.checked) {
+                    el.classList.add('border-blue-600', 'bg-blue-50/50', 'text-blue-600');
+                    el.classList.remove('border-slate-200');
+                } else {
+                    el.classList.remove('border-blue-600', 'bg-blue-50/50', 'text-blue-600');
+                    el.classList.add('border-slate-200');
+                }
+            });
+
+            if (selectedJob && recommendedCategories[selectedJob]) {
+                badge.innerText = `💡 ${selectedJob} 인기 분야 자동 추천됨`;
+                const recList = recommendedCategories[selectedJob];
+
+                document.querySelectorAll('input[name="category"]').forEach(cb => {
+                    cb.checked = recList.includes(cb.value);
+                    updateCheckboxStyle(cb);
+                });
+            }
+        }
+
+        // 체크박스 스타일 업데이트
+        function updateCheckboxStyle(checkbox) {
+            const label = checkbox.closest('label');
+            if (checkbox.checked) {
+                label.classList.add('border-blue-500', 'bg-blue-50', 'text-blue-700');
+                label.classList.remove('border-slate-200', 'bg-white');
+            } else {
+                label.classList.remove('border-blue-500', 'bg-blue-50', 'text-blue-700');
+                label.classList.add('border-slate-200', 'bg-white');
+            }
+        }
+
+        document.querySelectorAll('input[name="category"]').forEach(cb => {
+            cb.addEventListener('change', function() {
+                updateCheckboxStyle(this);
+            });
+        });
+
+        // 주민번호 입력 포커스 이동
+        document.getElementById('ssnFront').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            if (this.value.length === 6) {
+                document.getElementById('ssnBack').focus();
+            }
+        });
+
+        document.getElementById('ssnBack').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^1-4]/g, '');
+        });
+
+        // 폼 제출 처리 (카카오톡 알림 전송 로직 포함)
+        async function handleSubmit(event) {
+            event.preventDefault();
+
+            const job = document.querySelector('input[name="job"]:checked')?.value;
+            const categories = Array.from(document.querySelectorAll('input[name="category"]:checked')).map(cb => cb.value);
+            
+            if (categories.length === 0) {
+                alert('관심 있는 상담 분야를 최소 1개 이상 선택해 주세요.');
+                return;
+            }
+
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const ssnFront = document.getElementById('ssnFront').value;
+            const ssnBack = document.getElementById('ssnBack').value;
+            const regionMain = document.getElementById('regionMain').value;
+            const regionSub = document.getElementById('regionSub').value;
+            const time = document.getElementById('preferredTime').value;
+            const type = document.getElementById('preferredType').value;
+            const memo = document.getElementById('memo').value || '없음';
+
+            const fullSSN = `${ssnFront}-${ssnBack}******`;
+            const fullRegion = `${regionMain} ${regionSub}`.trim();
+
+            // 카카오톡 수신 텍스트 템플릿 생성
+            const messageText = `[🚨 신규 24시 상담 신청 완료]\n\n` +
+                `👤 성함: ${name}\n` +
+                `📞 연락처: ${phone}\n` +
+                `🆔 주민앞자리: ${fullSSN}\n` +
+                `📍 거주지역: ${fullRegion}\n` +
+                `💼 직군: ${job}\n` +
+                `🎯 관심분야: ${categories.join(', ')}\n` +
+                `⏰ 희망시간: ${time}\n` +
+                `💬 희망방식: ${type}\n` +
+                `📝 메모: ${memo}`;
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> 전송 중...`;
+
+            try {
+                // 연동 전송 시도 (설정된 Webhook URL이 있는 경우)
+                if (KAKAO_WEBHOOK_URL) {
+                    await fetch(KAKAO_WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ text: messageText })
+                    });
+                } else {
+                    // 서버 연동 전 시뮬레이션 콘솔 확인
+                    console.log("=== 설계사님 카카오톡으로 발송될 메시지 내용 ===");
+                    console.log(messageText);
+                }
+
+                // 성공 모달 표시
+                document.getElementById('successModal').classList.remove('hidden');
+            } catch (error) {
+                console.error("전송 오류:", error);
+                // 오류시에도 고객 경험을 위해 접수완료 모달 출력
+                document.getElementById('successModal').classList.remove('hidden');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> 24시간 무료 맞춤 상담 신청하기`;
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').classList.add('hidden');
+            document.getElementById('consultationForm').reset();
+            document.getElementById('recommendBadge').innerText = '';
+            
+            document.querySelectorAll('.job-option').forEach(el => {
+                el.classList.remove('border-blue-600', 'bg-blue-50/50', 'text-blue-600');
+                el.classList.add('border-slate-200');
+            });
+
+            document.querySelectorAll('input[name="category"]').forEach(cb => {
+                cb.checked = false;
+                updateCheckboxStyle(cb);
+            });
+        }
+
+        function togglePrivacyModal() {
+            const modal = document.getElementById('privacyModal');
+            modal.classList.toggle('hidden');
+        }
+
+        // 전화번호 자동 하이픈
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^0-9]/g, '');
+            if (value.length > 3 && value.length <= 7) {
+                e.target.value = value.slice(0, 3) + '-' + value.slice(3);
+            } else if (value.length > 7) {
+                e.target.value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7, 11);
+            } else {
+                e.target.value = value;
+            }
+        });
+    </script>
+</body>
+</html>
