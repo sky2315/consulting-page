@@ -356,7 +356,7 @@
     <!-- JavaScript Logic -->
     <script>
         // 🚨 구글 앱스 크립트 웹앱 URL 또는 Webhook 주소를 넣으세요.
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyUv4BlfLuPtHgIV7IWiZ7Kia5NUBDdXaNKeeH-_O3MBhRw-szE-vDKoIkUoRKUQ7LW2g/exec"; 
+        const GOOGLE_SCRIPT_URL = "여기에_구글_웹앱_URL을_붙여넣으세요"; 
 
         // 직군별 추천 관심 분야 매핑
         const recommendedCategories = {
@@ -499,13 +499,13 @@
             document.querySelectorAll('.job-option').forEach(el => {
                 el.classList.remove('border-blue-600', 'bg-blue-50/50', 'text-blue-600');
                 el.classList.add('border-slate-200');
-            });
+            });      
 
             document.querySelectorAll('input[name="category"]').forEach(cb => {
                 cb.checked = false;
                 updateCheckboxStyle(cb);
-            });
+            });      
         }
-    </script>
-</body>
-</html>
+    </script>      
+</body>      
+</html>      
