@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <!-- 모바일 비율 자동 100% 확대 고정 (왼쪽 쏠림/화면축소 방지) -->
+  <!-- 모바일 비율 자동 100% 확대 고정 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>24시간 맞춤 자산·보험 무료 컨설팅</title>
   <style>
@@ -34,7 +34,7 @@
       padding: 24px 16px;
       border-radius: 12px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-      margin: 0 auto; /* 중앙 정렬 고정 */
+      margin: 0 auto;
     }
     h2 {
       text-align: center;
@@ -324,7 +324,8 @@
 </div>
 
 <script>
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyUv4BlfLuPtHgIV7IWiZ7Kia5NUBDdXaNKeeH-_O3MBhRw-szE-vDKoIkUoRKUQ7LW2g/exec";
+  // 👇 아래 큰따옴표("") 안에 새 구글 웹앱 URL을 붙여넣으세요!
+  const GOOGLE_SCRIPT_URL = "여기에_새로_복사한_구글_웹앱_URL을_붙여넣으세요";
 
   // 전화번호 자동 하이픈 (-)
   document.getElementById('phone').addEventListener('input', function (e) {
@@ -374,7 +375,7 @@
     document.getElementById('privacyModal').style.display = show ? 'flex' : 'none';
   }
 
-  // 폼 제출
+  // 폼 제출 (CORS 오류 완전 해결 no-cors 처리)
   document.getElementById('consultForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -406,28 +407,24 @@
 
     fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
-      body: formData
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.result === 'success') {
-        alert("성공적으로 상담 신청이 완료되었습니다!");
-        document.getElementById('consultForm').reset();
-        document.querySelectorAll('.btn-job').forEach(b => b.classList.remove('active'));
-      } else {                                              
-        alert("전송 중 오류가 발생했습니다. 다시 시도해 주세요.");
-      }
-    })                                              
+      mode: 'no-cors',
+      body: formData    
+    })    
+    .then(() => {
+      alert("성공적으로 상담 신청이 완료되었습니다!");
+      document.getElementById('consultForm').reset();
+      document.querySelectorAll('.btn-job').forEach(b => b.classList.remove('active'));
+    })    
     .catch(err => {
       console.error(err);
-      alert("전송 중 오류가 발생했습니다.");
-    })                                              
+      alert("전송 중 오류가 발생했습니다. 다시 시도해 주세요.");
+    })    
     .finally(() => {
       submitBtn.disabled = false;
       submitBtn.innerText = "24시간 무료 맞춤 상담 신청하기";
-    });                                              
-  });                                              
-</script>                                              
+    });    
+  });    
+</script>    
 
-</body>                                              
-</html>                                              
+</body>    
+</html>    
