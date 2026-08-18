@@ -64,7 +64,8 @@
     }
     input[type="text"],
     input[type="tel"],
-    input[type="password"] {
+    input[type="password"],
+    select {
       width: 100%;
       height: 48px;
       padding: 0 12px;
@@ -73,11 +74,13 @@
       font-size: 16px !important;
       -webkit-appearance: none;
       outline: none;
+      background-color: #fff;
       transition: border-color 0.2s;
     }
     input[type="text"]:focus,
     input[type="tel"]:focus,
-    input[type="password"]:focus {
+    input[type="password"]:focus,
+    select:focus {
       border-color: #2563eb;
     }
     
@@ -101,17 +104,23 @@
       flex-shrink: 0;
     }
 
-    /* 직군 버튼 2열 배치 */
+    /* 버튼 그룹 배치 (직군 / 희망방식) */
     .btn-group {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 8px;
       width: 100%;
     }
-    .btn-job {
+    .btn-group-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      width: 100%;
+    }
+    .btn-option {
       width: 100%;
       height: 48px;
-      padding: 0 8px;
+      padding: 0 4px;
       background-color: #f1f5f9;
       border: 1px solid #cbd5e1;
       border-radius: 6px;
@@ -122,7 +131,7 @@
       transition: all 0.2s;
       white-space: nowrap;
     }
-    .btn-job.active {
+    .btn-option.active {
       background-color: #2563eb;
       color: #fff;
       border-color: #2563eb;
@@ -233,22 +242,22 @@
     <div class="form-group">
       <label for="name">이름</label>
       <input type="text" id="name" name="name" placeholder="홍길동" required />
-    </div>  
+    </div>
 
     <!-- 연락처 -->
     <div class="form-group">
       <label for="phone">연락처</label>
       <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" maxlength="13" required />
-    </div>  
+    </div>
 
     <!-- 주민등록번호 -->
     <div class="form-group">
       <label for="rrn1">주민등록번호</label>
       <div class="rrn-container">
-        <input   
-          type="tel"   
-          id="rrn1"   
-          name="rrn1"   
+        <input 
+          type="tel" 
+          id="rrn1" 
+          name="rrn1" 
           maxlength="6" 
           pattern="[0-9]*" 
           inputmode="numeric" 
@@ -275,12 +284,36 @@
     <div class="form-group">
       <label>직군 선택</label>
       <div class="btn-group">
-        <button type="button" class="btn-job" onclick="selectJob(this, '직장인')">직장인</button>
-        <button type="button" class="btn-job" onclick="selectJob(this, '자영업/사업자')">자영업/사업자</button>
-        <button type="button" class="btn-job" onclick="selectJob(this, '전문직')">전문직</button>
-        <button type="button" class="btn-job" onclick="selectJob(this, '기타/무직')">기타/무직</button>
+        <button type="button" class="btn-option btn-job" onclick="selectOption(this, 'job', '직장인')">직장인</button>
+        <button type="button" class="btn-option btn-job" onclick="selectOption(this, 'job', '자영업/사업자')">자영업/사업자</button>
+        <button type="button" class="btn-option btn-job" onclick="selectOption(this, 'job', '전문직')">전문직</button>
+        <button type="button" class="btn-option btn-job" onclick="selectOption(this, 'job', '기타/무직')">기타/무직</button>
       </div>
       <input type="hidden" id="job" name="job" required />
+    </div>
+
+    <!-- 희망 상담 방식 -->
+    <div class="form-group">
+      <label>희망 상담 방식</label>
+      <div class="btn-group-3">
+        <button type="button" class="btn-option btn-contact" onclick="selectOption(this, 'contactMethod', '전화 상담')">📞 전화</button>
+        <button type="button" class="btn-option btn-contact" onclick="selectOption(this, 'contactMethod', '문자 상담')">💬 문자</button>
+        <button type="button" class="btn-option btn-contact" onclick="selectOption(this, 'contactMethod', '카카오톡')">🟡 카카오톡</button>
+      </div>
+      <input type="hidden" id="contactMethod" name="contactMethod" required />
+    </div>
+
+    <!-- 희망 상담 시간 -->
+    <div class="form-group">
+      <label for="preferredTime">희망 상담 시간</label>
+      <select id="preferredTime" name="preferredTime" required>
+        <option value="" disabled selected>상담 희망 시간을 선택해주세요</option>
+        <option value="언제나 가능">언제나 가능 (빠른 상담)</option>
+        <option value="오전 (09:00 ~ 12:00)">오전 (09:00 ~ 12:00)</option>
+        <option value="오후 (12:00 ~ 18:00)">오후 (12:00 ~ 18:00)</option>
+        <option value="야간/저녁 (18:00 ~ 21:00)">야간/저녁 (18:00 ~ 21:00)</option>
+        <option value="주말 가능">주말 가능</option>
+      </select>
     </div>
 
     <!-- 관심 분야 -->
@@ -314,17 +347,16 @@
   <div class="modal-content">
     <h3>개인정보 수집 및 이용 동의</h3>
     <br/>
-    <p>1. 수집 항목: 이름, 연락처, 주민등록번호, 직군, 관심분야</p>
+    <p>1. 수집 항목: 이름, 연락처, 주민등록번호, 직군, 희망방식, 희망시간, 관심분야</p>
     <p>2. 이용 목적: 무료 자산 및 보험 컨설팅 상담 제공</p>
     <p>3. 보유 기간: 목적 달성 시 또는 신청자의 삭제 요청 시까지</p>
-    <br/>  
+    <br/>
     <p>※ 동의를 거부할 수 있으나, 상담 서비스 제공이 제한될 수 있습니다.</p>
     <button type="button" class="modal-close" onclick="togglePrivacyModal(false)">닫기</button>
-  </div>  
-</div>  
+  </div>
+</div>
 
-<script>  
-  // 새 구글 앱스 스크립트 URL 반영 완료
+<script>
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxU27Y3ab6Ydp0IqI0EyV6IAryw8FPRRhfgauAXGLjQxbsep9XrKVGf7P3GsIqfMbRPiw/exec";
 
   // 전화번호 자동 하이픈 (-)
@@ -334,10 +366,10 @@
       e.target.value = val;
     } else if (val.length < 8) {
       e.target.value = val.substr(0, 3) + '-' + val.substr(3);
-    } else {  
+    } else {
       e.target.value = val.substr(0, 3) + '-' + val.substr(3, 4) + '-' + val.substr(7, 4);
     }
-  });  
+  });
 
   // 주민등록번호 제어 및 모바일 포커스 이동
   const rrn1 = document.getElementById('rrn1');
@@ -363,11 +395,12 @@
   rrn2.addEventListener('input', handleRrn2);
   rrn2.addEventListener('keyup', handleRrn2);
 
-  // 직군 선택
-  function selectJob(btn, val) {
-    document.querySelectorAll('.btn-job').forEach(b => b.classList.remove('active'));
+  // 직군 및 희망방식 선택 공통 함수
+  function selectOption(btn, targetId, val) {
+    const parent = btn.parentElement;
+    parent.querySelectorAll('.btn-option').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    document.getElementById('job').value = val;
+    document.getElementById(targetId).value = val;
   }
 
   // 약관 모달
@@ -382,6 +415,18 @@
     const job = document.getElementById('job').value;
     if (!job) {
       alert("직군을 선택해 주세요.");
+      return;
+    }
+
+    const contactMethod = document.getElementById('contactMethod').value;
+    if (!contactMethod) {
+      alert("희망 상담 방식을 선택해 주세요.");
+      return;
+    }
+
+    const preferredTime = document.getElementById('preferredTime').value;
+    if (!preferredTime) {
+      alert("희망 상담 시간을 선택해 주세요.");
       return;
     }
 
@@ -403,28 +448,30 @@
     formData.append('phone', phone);
     formData.append('rrn', rrn);
     formData.append('job', job);
+    formData.append('contactMethod', contactMethod);
+    formData.append('preferredTime', preferredTime);
     formData.append('interests', interests.join(', '));
 
     fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
-      body: formData              
-    })              
+      body: formData    
+    })    
     .then(() => {
       alert("성공적으로 상담 신청이 완료되었습니다!");
       document.getElementById('consultForm').reset();
-      document.querySelectorAll('.btn-job').forEach(b => b.classList.remove('active'));
-    })              
+      document.querySelectorAll('.btn-option').forEach(b => b.classList.remove('active'));
+    })    
     .catch(err => {
       console.error(err);
       alert("전송 중 오류가 발생했습니다. 다시 시도해 주세요.");
-    })              
+    })    
     .finally(() => {
       submitBtn.disabled = false;
       submitBtn.innerText = "24시간 무료 맞춤 상담 신청하기";
-    });              
-  });              
-</script>              
+    });    
+  });    
+</script>    
 
-</body>              
-</html>              
+</body>    
+</html>    
