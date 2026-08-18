@@ -2,7 +2,6 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <!-- 모바일 브라우저에 맞게 뷰포트 폭 100% 설정 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>24시간 맞춤 자산·보험 무료 컨설팅</title>
   <style>
@@ -13,22 +12,23 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
     html, body {
-      width: 100%;
+      width: 100% !important;
       min-height: 100%;
       background-color: #f4f6f9;
       color: #333;
+      overflow-x: hidden;
     }
     body {
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding: 12px; /* 모바일 외부 여백 최소화 */
+      padding: 8px !important; /* 모바일 좌우 여백 최소화 */
     }
     .container {
       background-color: #ffffff;
-      width: 100%; /* 화면 너비 100% 활용 */
-      max-width: 600px; /* PC/태블릿에서는 최대 600px까지만 확장 */
-      padding: 24px 16px; /* 모바일 내부 여백 줄임 */
+      width: 100% !important; /* 스마트폰 가로 폭 100% 꽉 채우기 */
+      max-width: 100% !important;
+      padding: 20px 14px;
       border-radius: 12px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.06);
       margin: 0 auto;
@@ -45,7 +45,7 @@
       text-align: center;
       font-size: 14px;
       color: #666;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
       writing-mode: horizontal-tb !important;
       word-break: keep-all;
     }
@@ -82,7 +82,7 @@
       border-color: #2563eb;
     }
     
-    /* 주민등록번호 레이아웃 (가로 100% 채우기) */
+    /* 주민등록번호 레이아웃 */
     .rrn-container {
       display: flex;
       align-items: center;
@@ -102,7 +102,7 @@
       flex-shrink: 0;
     }
 
-    /* 직군 버튼 2열 가로 배치 (너비 100%) */
+    /* 직군 버튼 2열 가로 배치 */
     .btn-group {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -130,17 +130,21 @@
       border-color: #2563eb;
     }
 
-    /* 관심분야 체크박스 */
+    /* 관심 분야 체크박스 (간병, 요양, 노후 추가) */
     .checkbox-group {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
+      gap: 12px 8px;
       width: 100%;
+      background-color: #f8fafc;
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
     }
     .checkbox-item {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       font-size: 14px;
       cursor: pointer;
       writing-mode: horizontal-tb !important;
@@ -153,7 +157,7 @@
       flex-shrink: 0;
     }
 
-    /* 개인정보 동의 및 버튼 */
+    /* 개인정보 동의 및 모달 */
     .privacy-box {
       margin-top: 20px;
       font-size: 13px;
@@ -284,14 +288,17 @@
       <input type="hidden" id="job" name="job" required />
     </div>
 
-    <!-- 관심 분야 -->
+    <!-- 관심 분야 (간병, 요양, 노후 포함) -->
     <div class="form-group">
       <label>관심 분야 (중복 선택 가능)</label>
       <div class="checkbox-group">
-        <label class="checkbox-item"><input type="checkbox" name="interest" value="보장분석/보험 리모델링"> 보장분석</label>
-        <label class="checkbox-item"><input type="checkbox" name="interest" value="자산관리/저축 플랜"> 자산관리</label>
-        <label class="checkbox-item"><input type="checkbox" name="interest" value="절세/세무 상담"> 절세상담</label>
-        <label class="checkbox-item"><input type="checkbox" name="interest" value="은퇴/연금 플랜"> 은퇴연금</label>
+        <label class="checkbox-item"><input type="checkbox" name="interest" value="암/뇌/심질환 보장"> 암·뇌·심질환</label>
+        <label class="checkbox-item"><input type="checkbox" name="interest" value="간병/요양 보장"> 간병·요양</label>
+        <label class="checkbox-item"><input type="checkbox" name="interest" value="노후/은퇴/연금 플랜"> 노후·은퇴플랜</label>
+        <label class="checkbox-item"><input type="checkbox" name="interest" value="운전자/자동차 보험"> 운전자·자동차</label>
+        <label class="checkbox-item"><input type="checkbox" name="interest" value="보장분석/보험 리모델링"> 보장분석·리모델링</label>
+        <label class="checkbox-item"><input type="checkbox" name="interest" value="자산관리/저축 플랜"> 자산관리·저축</label>
+        <label class="checkbox-item"><input type="checkbox" name="interest" value="절세/세무 상담"> 절세·세무상담</label>
       </div>
     </div>
 
@@ -412,20 +419,20 @@
         alert("성공적으로 상담 신청이 완료되었습니다!");
         document.getElementById('consultForm').reset();
         document.querySelectorAll('.btn-job').forEach(b => b.classList.remove('active'));
-      } else {      
+      } else {                                                            
         alert("전송 중 오류가 발생했습니다. 다시 시도해 주세요.");
       }
-    })      
+    })                                                    
     .catch(err => {
       console.error(err);
       alert("전송 중 오류가 발생했습니다.");
-    })      
+    })                                                    
     .finally(() => {
       submitBtn.disabled = false;
       submitBtn.innerText = "24시간 무료 맞춤 상담 신청하기";
-    });      
-  });      
-</script>      
+    });                                                    
+  });                                                    
+</script>                                                    
 
-</body>      
-</html>      
+</body>                                                    
+</html>                                                    
