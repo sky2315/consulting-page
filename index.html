@@ -357,7 +357,8 @@
 </div>
 
 <script>
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxU27Y3ab6Ydp0IqI0EyV6IAryw8FPRRhfgauAXGLjQxbsep9XrKVGf7P3GsIqfMbRPiw/exec";
+  // 새로 보내주신 최신 웹 앱 URL 적용 완료
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzt6u_L3k_WVZ7VNIdH9i-NNKkz9t683NPWbIEV9dFmzfJ6wuRE9pehIknH8i5q9Uqbxg/exec";
 
   // 전화번호 자동 하이픈 (-)
   document.getElementById('phone').addEventListener('input', function (e) {
@@ -455,23 +456,23 @@
     fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
-      body: formData    
-    })    
+      body: formData      
+    })      
     .then(() => {
       alert("성공적으로 상담 신청이 완료되었습니다!");
       document.getElementById('consultForm').reset();
       document.querySelectorAll('.btn-option').forEach(b => b.classList.remove('active'));
-    })    
+    })      
     .catch(err => {
       console.error(err);
       alert("전송 중 오류가 발생했습니다. 다시 시도해 주세요.");
-    })    
+    })      
     .finally(() => {
       submitBtn.disabled = false;
       submitBtn.innerText = "24시간 무료 맞춤 상담 신청하기";
-    });    
-  });    
-</script>    
+    });      
+  });      
+</script>      
 
-</body>    
-</html>    
+</body>      
+</html>      
